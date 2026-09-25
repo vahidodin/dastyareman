@@ -28,8 +28,8 @@ ARG USE_SLIM
 ARG UID
 ARG GID
 
-# The frontend build needs more than the default Node heap.
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+# The frontend build aborts (exit 134) on the default heap. Match upstream CI.
+ENV NODE_OPTIONS="--max-old-space-size=12288"
 
 WORKDIR /app
 

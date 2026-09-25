@@ -23,6 +23,14 @@ jobs:
           sudo docker image prune -af || true
           df -h
 
+      - name: Add swap for the frontend build
+        run: |
+          sudo fallocate -l 10G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          free -h
+
       - uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
